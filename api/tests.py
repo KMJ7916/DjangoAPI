@@ -23,7 +23,7 @@ class ProductTests(APITestCase):
         response = self.client.get(reverse('product_list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
-    def test_delete_product(self,pk):
+    def test_delete_product(self):
         product =  Product.objects.create(name='Test Produect', price=30)
         url = reverse('product_detail',args=[product.id])
         response = self.client.delete(url)
@@ -32,11 +32,11 @@ class ProductTests(APITestCase):
         
 class ProductRetrieveTests(APITestCase):
     def setUp(self):
-        self.product = Product.objects.create(name='Test Produect', price=20)
+        self.product = Product.objects.create(name='Test Product', price=20)
         self.url = reverse('product_detail',args=[self.product.id])
     
     def test_retrieve_produect(self):
-        response = self.clientget(self.url)
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        response_data = json.loads(response.content.decode('utf-8'))  # 바이트 문자열을 디코딩하여 JSON으로 변환
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode('utf-8'))
         self.assertEqual(response_data['name'], 'Test Product') 
