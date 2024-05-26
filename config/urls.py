@@ -35,4 +35,8 @@ urlpatterns = [
     path('api/',include('api.urls')),
     path('apiset/',include('apiset.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('token/',include('apitoken.urls')),
+    path('frontbackdev/',include('frontbackdev.urls')),
+    path('filter/',include('filterRest.urls')),
+    path('page/',include('pageREST.urls')),
 ]
